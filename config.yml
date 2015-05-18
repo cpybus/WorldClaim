@@ -1,0 +1,17 @@
+#This is the maximum amount of chunks a player is allowed.
+MaximumChunks: 25
+
+#The "currency" that will be used in the transaction. "item" and "money"
+Currency: 'item'
+
+#The item that will be used if "item" is selected above
+Item: 'Diamond'
+
+#This represents how much each successive chunk will cost.
+#"x" represents the chunk number. ie, if a player was purchasing his 10th chunk, x would be 10.
+#The default expression is exponential, meaning that the more chunks a player already owns, the more the next one will cost.
+#Please be sure to only use the four basic operations (+ - * /) and parenthesis.
+CostEquation: '(2.5 * (x * x)) - (2.5 * x) + 10' 
+
+#Check for updates
+check_for_updates: true

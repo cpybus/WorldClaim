@@ -1,0 +1,12 @@
+name: WorldClaim
+main: me.chris.WorldClaim.WorldClaimMain
+version: 2.0
+description: A plugin that allows players to claim their own protected land.
+depend: [Vault, WorldEdit, WorldGuard]
+commands:
+    worldclaim:
+        description: This command is the base command for the entire plugin.
+        usage: /<command>
+    wc:
+        description: This is the same thing as using worldclaim
+        usage: /<command>
