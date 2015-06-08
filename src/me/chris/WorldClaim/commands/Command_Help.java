@@ -1,7 +1,5 @@
 package me.chris.WorldClaim.commands;
 
-import me.chris.fanciful.FancyMessage;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -11,7 +9,18 @@ public class Command_Help
 	{
 		
 		p.sendMessage("§5==================§c [ WorldClaim Help ] §5==================");
+		p.sendMessage("§c/WorldClaim §e- States the general info.");
+		p.sendMessage("§c/WorldClaim §7help §e- Brings up the help menu.");
+		p.sendMessage("§c/WorldClaim §7claim §e- Claims a chunk. ");
+		p.sendMessage("§c/WorldClaim §7unclaim §e- Unclaims a chunk.");
+		p.sendMessage("§c/WorldClaim §7map §e- Views a map of the area.");
+		p.sendMessage("§c/WorldClaim §7view [playername] §e- Allows you to see a claim. ");
+		p.sendMessage("§c/WorldClaim §7addmember [name] §e- Adds a member to your claim ");
+		p.sendMessage("§c/WorldClaim §7check §e- Checks your current chunk. ");
+		p.sendMessage("§c/WorldClaim §7confirm §e- Will confirm a previous action.");
+		p.sendMessage("§3NOTE: You may substitue /wc for /worldclaim.");
 		
+		/*
 		new FancyMessage("§c/WorldClaim §e- States the general info.")
 			.tooltip("This command does nothing but state the \nauthor and the current version")
 			.suggest("/WorldClaim")
@@ -49,6 +58,6 @@ public class Command_Help
 			.suggest("/WorldClaim view")
 			.send(p);
 		new FancyMessage("NOTE: You may substitue /wc for /worldclaim.").color(ChatColor.DARK_AQUA).style(ChatColor.ITALIC)
-			.send(p);
+			.send(p);*/
 	}
 }

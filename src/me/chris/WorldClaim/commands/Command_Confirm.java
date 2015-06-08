@@ -14,8 +14,8 @@ import me.chris.WorldClaim.Vars;
 import org.bukkit.entity.Player;
 
 import com.sk89q.worldedit.BlockVector2D;
-import com.sk89q.worldguard.protection.databases.ProtectionDatabaseException;
 import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.managers.storage.StorageException;
 import com.sk89q.worldguard.protection.regions.ProtectedPolygonalRegion;
 
 public class Command_Confirm
@@ -68,22 +68,20 @@ public class Command_Confirm
 		}
 		
 		ProtectedPolygonalRegion NewRegion = new ProtectedPolygonalRegion("worldclaim-" + p.getName().toLowerCase(), list, 0, 256);
-		NewRegion.getOwners().getPlayers().add(p.getName().toLowerCase());
+		NewRegion.getOwners().addPlayer(p.getUniqueId());
 		
 		try
 		{
 			RM.addRegion(NewRegion);
 			RM.save();
 		}
-		catch (ProtectionDatabaseException e)
+		catch (StorageException e)
 		{
 			Vars.log.log(Level.SEVERE, "[WorldClaim] There was an unexpected internal error. Details below.");
 			p.sendMessage("§a[WorldClaim] §cUnexpected internal error. You will not be charged.");
 			e.printStackTrace();
 			return;
 		}
-		
-		
 		
 		Vars.particles.add(new ParticleObject(p, NewRegion.getPoints(), 10));
 		finances(p, true, costAmount);
@@ -117,7 +115,7 @@ public class Command_Confirm
 			{
 				RM.load();
 			}
-			catch (ProtectionDatabaseException e)
+			catch (StorageException e)
 			{
 				e.printStackTrace();
 			}
@@ -127,8 +125,18 @@ public class Command_Confirm
 		
 		ProtectedPolygonalRegion CombinedRegion = new ProtectedPolygonalRegion("worldclaim-" + p.getName().toLowerCase(), newRegionPoints, 0, 256);
 		
-		CombinedRegion.getOwners().getPlayers().addAll(ActualOldRegion.getOwners().getPlayers());
-		CombinedRegion.getMembers().getPlayers().addAll(ActualOldRegion.getMembers().getPlayers());
+		for(String s : ActualOldRegion.getOwners().getPlayers())
+			CombinedRegion.getOwners().addPlayer(s);
+		
+		for(UUID u : ActualOldRegion.getOwners().getUniqueIds())
+			CombinedRegion.getOwners().addPlayer(u);
+		
+		for(String s : ActualOldRegion.getMembers().getPlayers())
+			CombinedRegion.getMembers().addPlayer(s);
+		
+		for(UUID u : ActualOldRegion.getMembers().getUniqueIds())
+			CombinedRegion.getMembers().addPlayer(u);
+		
 		CombinedRegion.getFlags().putAll(ActualOldRegion.getFlags());
 		
 		Vars.particles.add(new ParticleObject(p, newRegionPoints, 50));
@@ -138,7 +146,7 @@ public class Command_Confirm
 			RM.addRegion(CombinedRegion);
 			RM.save();
 		}
-		catch (ProtectionDatabaseException e)
+		catch (StorageException e)
 		{
 			Vars.log.log(Level.SEVERE, "[WorldClaim] There was an unexpected internal error. Details below.");
 			p.sendMessage("§a[WorldClaim] §cUnexpected internal error. You will not be charged.");
@@ -216,7 +224,7 @@ public class Command_Confirm
 		{
 			RM.save();
 		}
-		catch (ProtectionDatabaseException e)
+		catch (StorageException e)
 		{
 			Vars.log.log(Level.SEVERE, "[WorldClaim] There was an unexpected internal error. Details below.");
 			p.sendMessage("§a[WorldClaim] §cUnexpected internal error.");
@@ -250,7 +258,7 @@ public class Command_Confirm
 			{
 				RM.load();
 			}
-			catch (ProtectionDatabaseException e)
+			catch (StorageException e)
 			{
 				e.printStackTrace();
 			}
@@ -260,8 +268,18 @@ public class Command_Confirm
 		
 		ProtectedPolygonalRegion CombinedRegion = new ProtectedPolygonalRegion("worldclaim-" + p.getName().toLowerCase(), newRegionPoints, 0, 256);
 		
-		CombinedRegion.getOwners().getPlayers().addAll(ActualOldRegion.getOwners().getPlayers());
-		CombinedRegion.getMembers().getPlayers().addAll(ActualOldRegion.getMembers().getPlayers());
+		for(String s : ActualOldRegion.getOwners().getPlayers())
+			CombinedRegion.getOwners().addPlayer(s);
+		
+		for(UUID u : ActualOldRegion.getOwners().getUniqueIds())
+			CombinedRegion.getOwners().addPlayer(u);
+		
+		for(String s : ActualOldRegion.getMembers().getPlayers())
+			CombinedRegion.getMembers().addPlayer(s);
+		
+		for(UUID u : ActualOldRegion.getMembers().getUniqueIds())
+			CombinedRegion.getMembers().addPlayer(u);
+		
 		CombinedRegion.getFlags().putAll(ActualOldRegion.getFlags());
 		
 		Vars.particles.add(new ParticleObject(p, newRegionPoints, 50));
@@ -271,7 +289,7 @@ public class Command_Confirm
 			RM.addRegion(CombinedRegion);
 			RM.save();
 		}
-		catch (ProtectionDatabaseException e)
+		catch (StorageException e)
 		{
 			Vars.log.log(Level.SEVERE, "[WorldClaim] There was an unexpected internal error. Details below.");
 			p.sendMessage("§a[WorldClaim] §cUnexpected internal error. You will not be charged.");

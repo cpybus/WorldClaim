@@ -4,8 +4,8 @@ import me.chris.WorldClaim.Vars;
 
 import org.bukkit.entity.Player;
 
-import com.sk89q.worldguard.protection.databases.ProtectionDatabaseException;
 import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.managers.storage.StorageException;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class Command_AddMember
@@ -22,13 +22,13 @@ public class Command_AddMember
 			return;
 		}
 		
-		ActualOldRegion.getOwners().getPlayers().add(s.toLowerCase());
+		ActualOldRegion.getMembers().addPlayer(s.toLowerCase());
 		
 		try
 		{
 			RM.save();
 		}
-		catch (ProtectionDatabaseException e)
+		catch (StorageException e)
 		{
 			
 		}
@@ -51,14 +51,14 @@ public class Command_AddMember
 		//Start at 1 because index=0 is "addmember"
 		for(int index = 1; index < s.length; index++)
 		{
-			ActualOldRegion.getOwners().getPlayers().add(s[index].toLowerCase());
+			ActualOldRegion.getOwners().addPlayer(s[index].toLowerCase());
 		}
 		
 		try
 		{
 			RM.save();
 		}
-		catch (ProtectionDatabaseException e)
+		catch (StorageException e)
 		{
 			
 		}

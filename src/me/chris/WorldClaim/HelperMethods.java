@@ -76,9 +76,9 @@ public class HelperMethods
 				double z = currentPoint.getZ();
 				do
 				{
-					ParticleEffect.RED_DUST.display(new Location(p.getWorld(), currentPoint.getX() + .5, y, z + .5), 0.01f, 0.01f, 0.01f, 0, 1, ps);
-					ParticleEffect.RED_DUST.display(new Location(p.getWorld(), currentPoint.getX() + .5, y + 1, z + .5), 0.01f, 0.01f, 0.01f, 0, 1, ps);
-					ParticleEffect.RED_DUST.display(new Location(p.getWorld(), currentPoint.getX() + .5, y + 2, z + .5), 0.01f, 0.01f, 0.01f, 0, 1, ps);
+					ParticleEffect.REDSTONE.display(0.01f, 0.01f, 0.01f, 0, 1, new Location(p.getWorld(), currentPoint.getX() + .5, y, z + .5), ps);
+					ParticleEffect.REDSTONE.display(0.01f, 0.01f, 0.01f, 0, 1, new Location(p.getWorld(), currentPoint.getX() + .5, y + 1, z + .5), ps);
+					ParticleEffect.REDSTONE.display(0.01f, 0.01f, 0.01f, 0, 1, new Location(p.getWorld(), currentPoint.getX() + .5, y + 2, z + .5), ps);
 					z = z + .5;
 					
 				}
@@ -97,9 +97,9 @@ public class HelperMethods
 				double x = currentPoint.getX();
 				do
 				{
-					ParticleEffect.RED_DUST.display(new Location(p.getWorld(), x + .5, y, currentPoint.getZ() + .5), 0.01f, 0.01f, 0.01f, 0, 1, ps);
-					ParticleEffect.RED_DUST.display(new Location(p.getWorld(), x + .5, y + 1, currentPoint.getZ() + .5), 0.01f, 0.01f, 0.01f, 0, 1, ps);
-					ParticleEffect.RED_DUST.display(new Location(p.getWorld(), x + .5, y + 2, currentPoint.getZ() + .5), 0.01f, 0.01f, 0.01f, 0, 1, ps);
+					ParticleEffect.REDSTONE.display(0.01f, 0.01f, 0.01f, 0, 1, new Location(p.getWorld(), x + .5, y, currentPoint.getZ() + .5), ps);
+					ParticleEffect.REDSTONE.display(0.01f, 0.01f, 0.01f, 0, 1, new Location(p.getWorld(), x + .5, y + 1, currentPoint.getZ() + .5), ps);
+					ParticleEffect.REDSTONE.display(0.01f, 0.01f, 0.01f, 0, 1, new Location(p.getWorld(), x + .5, y + 2, currentPoint.getZ() + .5), ps);
 					x = x + .5;
 					
 				}
@@ -110,6 +110,8 @@ public class HelperMethods
 				break;
 			}
 		}
+		
+		
 	}
 	
 	public static ArrayList<String> checkForNeighboringRegion(Player p, ProtectedPolygonalRegion r)
@@ -294,7 +296,9 @@ public class HelperMethods
 			}
 		}
 		
-		List<BlockVector2D> allPoints = r1.getPoints();
+		//List<BlockVector2D> allPoints = r1.getPoints();
+		
+		ArrayList<BlockVector2D> allPoints = new ArrayList<BlockVector2D>(r1.getPoints());
 		
 		for (BlockVector2D d : r2.getPoints())
 		{
